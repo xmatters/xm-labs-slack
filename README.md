@@ -1,4 +1,5 @@
 # Slack
+This is part of the xMatters Labs awesome listing. For others, see [here](https://github.com/xmatters/xMatters-Labs)
 Slack is a pretty sweet chat application with some great API hooks for integrations. This is a Script Library we put together to easily interact with the Slack API endpoints. 
 
 # Pre-Requisites
