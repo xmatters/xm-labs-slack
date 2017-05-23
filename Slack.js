@@ -49,7 +49,7 @@
     var text = "My text here. Click <https://xmatters.com | here> for a link!";
     var payload = { 
       "channel": "#general", 
-      "username": "xatters",
+      "username": "xmatters",
       "icon_url": "https://www.xmatters.com/wp-content/uploads/2016/12/xmatters-x-logo.png", 
       "text": text
     };
