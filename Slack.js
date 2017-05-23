@@ -23,6 +23,9 @@
  *
  *    getUserInfo - Gets the User info based on the User's id. The history returns the userid, not the username, so this can translate
  *       userid - The userid of the user to get (ex. U1234567890)
+ *
+ *    postMessage - Posts a message to the channel passed in the payload. (Payload details here: https://api.slack.com/methods/chat.postMessage)
+ *       payload - The chat.postMessage payload. See below for an example.
  *       
  *  Usage: 
  *  
@@ -30,10 +33,10 @@
     // Import the Slack shared library
     var Slack = require( 'Slack' );
 	
-	// getRoomHistory
-	// Get the room (channel) history and build the text for insertion into a Service Desk ticket for example.
-	// The format will be Service Desk platform dependent. See the README.md file for details
-	chatData = Slack.getRoomHistory( room.toLowerCase() );
+    // getRoomHistory
+    // Get the room (channel) history and build the text for insertion into a Service Desk ticket for example.
+    // The format will be Service Desk platform dependent. See the README.md file for details
+    chatData = Slack.getRoomHistory( room.toLowerCase() );
     chatText = buildSlackText( chatData, room.toLowerCase() );
 
     // createChannel
@@ -42,8 +45,18 @@
     var team    = Slack.getTeam();
     data.properties.chat_link = 'https://' + team.name + '.slack.com/messages/#' + data.properties.number;
 
-    // 
+    // postMessage
+    var text = "My text here. Click <https://xmatters.com | here> for a link!";"
+    var payload = { 
+      "channel": "#general, 
+      "username": "xatters",
+      "icon_url": "https://www.xmatters.com/wp-content/uploads/2016/12/xmatters-x-logo.png", 
+      "text": text
+    };
 
+    Slack.postMessage( payload );
+
+    
  *
  */
  
@@ -169,6 +182,38 @@ exports.getUserInfo = function( userid ) {
     
     return slackBody.user;
     
+}
+
+
+exports.postMessage = function( payload ) {
+    
+    payload.token = constants["Slack Token"];
+    var qs = jsonToQueryString( payload );
+
+    var slackRequest = http.request({
+        'endpoint': 'Slack',
+        'method': 'POST',
+        'path': '/api/chat.postMessage' + qs
+    });
+    
+    var slackResponse = slackRequest.write( payload );
+    var slackBody     = JSON.parse( slackResponse.body );
+    if( !slackBody.ok ) {
+        console.log( 'Error posting message!' );
+        return null;
+    }
+    
+    return slackBody;
+    
+};
+
+
+jsonToQueryString = function(json) {
+    return '?' + 
+        Object.keys(json).map(function(key) {
+            return encodeURIComponent(key) + '=' +
+                encodeURIComponent(json[key]);
+        }).join('&');
 }
 
 
