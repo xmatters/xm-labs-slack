@@ -24,7 +24,7 @@ Slack is a pretty sweet chat application with some great API hooks for integrati
    
 3. Click the Connect button and a popup will be displayed requesting authorization:
 <kbd>
-  <img src="media/xM-Slack-Authorize.png">
+  <img src="media/xM-Slack-Authorize.png" width="500">
 </kbd>
 
 4. Click Close. 
