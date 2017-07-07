@@ -12,9 +12,6 @@ Slack is a pretty sweet chat application with some great API hooks for integrati
 
 # Installation
 
-## Slack
-First, a Slack token will be needed. This isn't really a good idea, but I'm writting this up right now and it works. We should use a different method in the future. Anyway, navigate to [https://api.slack.com/docs/oauth-test-tokens](https://api.slack.com/docs/oauth-test-tokens) to get a test token for your team. Click the `Create Token` button which will generate a token. Copy this value and save for later. 
-
 ## xMatters
 1. Log in to your xMatters instance as a user with the Developer role (or anyone with access to the target communication plan). On the Developer tab, click Edit > Integration Builder for the target communication plan. 
 2. Click 'Edit Endpoints', and then click `Add Endpoint` to add an endpoint for Slack; fill out the following details:
@@ -22,20 +19,17 @@ First, a Slack token will be needed. This isn't really a good idea, but I'm writ
    | Item | Selection |
    | ---- | --------- |
    | Name | Slack |
-   | Base URL | https://slack.com/ |
+   | Base URL | `Leave blank` |
+   | Authorization Type | Slack |
    
-3. Click Save and Close.
-4. Click the `Edit Constants` button and `Add Constant`; fill out the following details to create a constant to hold the API key:
+3. Click the Connect button and a popup will be displayed requesting authorization:
+<kbd>
+  <img src="media/xM-Slack-Authorize.png">
+</kbd>
 
-   | Item | Selection |
-   | ---- | --------- |
-   | Name | Slack Token |
-   | Value | TOKEN_VALUE_HERE |
-   Where TOKEN_VALUE_HERE is the API Key from Slack in the steps above. 
-
-5. Click `Save Changes` and `Close`.
-6. Expand the Shared libraries section (if necessary) and click the `+ Add` button
-7. Update the name at the top from `My Shared Library` to `Slack`, then paste in the contents of the [Slack.js](Slack.js) file and hit `Save`.
+4. Click Close. 
+5. Expand the Shared libraries section (if necessary) and click the `+ Add` button
+6. Update the name at the top from `My Shared Library` to `Slack`, then paste in the contents of the [Slack.js](Slack.js) file and hit `Save`.
 
 From here the next steps will depend on how xMatters will integrate to Slack. 
 
