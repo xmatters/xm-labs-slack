@@ -1,4 +1,3 @@
-
 /*
  * Slack Shared Library
  *
@@ -10,7 +9,7 @@
  *       channelName - The name of the channel to create
  *
  *    getTeam - Gets the Slack team info. Handy for creating links to channels
- *		 
+ *       
  *    getChannel - Gets the channel details. There isn't a good API for getting a specific channel by name, so we
  *                 have to iterate through each channel to get it. 
  *       channelName - The name of the channel to retrieve
@@ -29,22 +28,19 @@
  *       
  *  Usage: 
  *  
-
     // Import the Slack shared library
     var Slack = require( 'Slack' );
-	
+    
     // getRoomHistory
     // Get the room (channel) history and build the text for insertion into a Service Desk ticket for example.
     // The format will be Service Desk platform dependent. See the README.md file for details
     chatData = Slack.getRoomHistory( room.toLowerCase() );
     chatText = buildSlackText( chatData, room.toLowerCase() );
-
     // createChannel
     // Create a channel based on the `number` value and build a link for inclusion in emails
     var channel = Slack.createChannel( data.properties.number );
     var team    = Slack.getTeam();
     data.properties.chat_link = 'https://' + team.name + '.slack.com/messages/#' + data.properties.number;
-
     // postMessage
     var text = "My text here. Click <https://xmatters.com | here> for a link!";
     var payload = { 
@@ -53,9 +49,7 @@
       "icon_url": "https://www.xmatters.com/wp-content/uploads/2016/12/xmatters-x-logo.png", 
       "text": text
     };
-
     Slack.postMessage( payload );
-
     
  *
  */
@@ -65,7 +59,7 @@ exports.createChannel = function( channelName ) {
     var slackRequest = http.request({
         'endpoint': 'Slack',
         'method': 'POST',
-        'path': '/channels.create?token=' + http.authenticate( 'Slack' ) + '&name=' + channelName
+        'path': '/api/channels.create?token=' + constants["Slack Token"] + '&name=' + channelName
     });
 
     var slackResponse = slackRequest.write();
@@ -90,7 +84,7 @@ exports.getTeam = function() {
     var slackRequest = http.request({
         'endpoint': 'Slack',
         'method': 'GET',
-        'path': '/team.info?token=' + http.authenticate( 'Slack' )
+        'path': '/api/team.info?token=' + constants["Slack Token"]
     });
     
     var slackResponse = slackRequest.write();
@@ -108,7 +102,7 @@ exports.getChannel = function( channelName ) {
     var slackRequest = http.request({
         'endpoint': 'Slack',
         'method': 'GET',
-        'path': '/channels.list?token=' + http.authenticate( 'Slack' )
+        'path': '/api/channels.list?token=' + constants["Slack Token"]
     });
     
     var slackResponse = slackRequest.write();
@@ -130,6 +124,24 @@ exports.getChannel = function( channelName ) {
 };
 
 
+
+exports.archiveChannel = function( channelName ) {
+    
+    var channel = this.getChannel( channelName );
+    
+    var slackRequest = http.request({
+        'endpoint': 'Slack',
+        'method': 'GET',
+        'path': 'api/channels.archive?token=' + constants["Slack Token"] + "&channel=" + channel.id
+    });
+    
+    var slackResponse = slackRequest.write();
+    var slackBody     = JSON.parse( slackResponse.body );
+            
+};
+
+
+
 exports.getRoomHistory = function( channelName, count, latest, oldest ){
   
     var channel = this.getChannel( channelName );
@@ -149,7 +161,7 @@ exports.getRoomHistory = function( channelName, count, latest, oldest ){
     var slackRequest = http.request({
         'endpoint': 'Slack',
         'method': 'GET',
-        'path': '/channels.history?token=' + http.authenticate( 'Slack' ) + parms
+        'path': '/api/channels.history?token=' + constants["Slack Token"] + parms
     });
     
     var slackResponse = slackRequest.write();
@@ -170,7 +182,7 @@ exports.getUserInfo = function( userid ) {
     var slackRequest = http.request({
         'endpoint': 'Slack',
         'method': 'GET',
-        'path': '/users.info?token=' + http.authenticate( 'Slack' ) + '&user=' + encodeURIComponent( userid )
+        'path': '/api/users.info?token=' + constants["Slack Token"] + '&user=' + encodeURIComponent( userid )
     });
     
     var slackResponse = slackRequest.write();
@@ -187,13 +199,13 @@ exports.getUserInfo = function( userid ) {
 
 exports.postMessage = function( payload ) {
     
-    payload.token = http.authenticate( 'Slack' );
+    payload.token = constants["Slack Token"];
     var qs = jsonToQueryString( payload );
 
     var slackRequest = http.request({
         'endpoint': 'Slack',
         'method': 'POST',
-        'path': '/chat.postMessage' + qs
+        'path': '/api/chat.postMessage' + qs
     });
     
     var slackResponse = slackRequest.write( payload );
@@ -208,6 +220,7 @@ exports.postMessage = function( payload ) {
 };
 
 
+
 jsonToQueryString = function(json) {
     return '?' + 
         Object.keys(json).map(function(key) {
@@ -215,7 +228,6 @@ jsonToQueryString = function(json) {
                 encodeURIComponent(json[key]);
         }).join('&');
 }
-
 
 
 // 
