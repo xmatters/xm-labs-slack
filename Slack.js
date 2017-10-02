@@ -59,7 +59,7 @@ exports.createChannel = function( channelName ) {
     var slackRequest = http.request({
         'endpoint': 'Slack',
         'method': 'POST',
-        'path': '/api/channels.create?token=' + http.authenticate( 'Slack' ) + '&name=' + channelName
+        'path': '/channels.create?token=' + http.authenticate( 'Slack' ) + '&name=' + channelName
     });
 
     var slackResponse = slackRequest.write();
@@ -84,7 +84,7 @@ exports.getTeam = function() {
     var slackRequest = http.request({
         'endpoint': 'Slack',
         'method': 'GET',
-        'path': '/api/team.info?token=' + http.authenticate( 'Slack' )
+        'path': '/team.info?token=' + http.authenticate( 'Slack' )
     });
     
     var slackResponse = slackRequest.write();
@@ -102,7 +102,7 @@ exports.getChannel = function( channelName ) {
     var slackRequest = http.request({
         'endpoint': 'Slack',
         'method': 'GET',
-        'path': '/api/channels.list?token=' + http.authenticate( 'Slack' )
+        'path': '/channels.list?token=' + http.authenticate( 'Slack' )
     });
     
     var slackResponse = slackRequest.write();
@@ -161,7 +161,7 @@ exports.getRoomHistory = function( channelName, count, latest, oldest ){
     var slackRequest = http.request({
         'endpoint': 'Slack',
         'method': 'GET',
-        'path': '/api/channels.history?token=' + http.authenticate( 'Slack' ) + parms
+        'path': '/channels.history?token=' + http.authenticate( 'Slack' ) + parms
     });
     
     var slackResponse = slackRequest.write();
@@ -182,7 +182,7 @@ exports.getUserInfo = function( userid ) {
     var slackRequest = http.request({
         'endpoint': 'Slack',
         'method': 'GET',
-        'path': '/api/users.info?token=' + http.authenticate( 'Slack' ) + '&user=' + encodeURIComponent( userid )
+        'path': '/users.info?token=' + http.authenticate( 'Slack' ) + '&user=' + encodeURIComponent( userid )
     });
     
     var slackResponse = slackRequest.write();
@@ -205,7 +205,7 @@ exports.postMessage = function( payload ) {
     var slackRequest = http.request({
         'endpoint': 'Slack',
         'method': 'POST',
-        'path': '/api/chat.postMessage' + qs
+        'path': '/chat.postMessage' + qs
     });
     
     var slackResponse = slackRequest.write( payload );
