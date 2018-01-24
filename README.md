@@ -148,7 +148,8 @@ Another common use case is to pull the history of a chat into a Service Desk tic
 
    ``` 
 
-The `buildSlackText` function is going to differ based on the Service Desk platform. Here are a couple of examples we've put together:
+The `buildSlackText` function is going to differ based on the Service Desk platform. Here are a couple of examples we've put together. Note, this uses [momentjs](https://momentjs.com) to build the timestamp because working with dates in javascript is not fun. 
+
 ```
 // buildSlackText for ServiceNow
 
