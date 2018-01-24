@@ -27,7 +27,7 @@ We will need to create a new application, which will generate a token for xMatte
 2. Give the app a descriptive name and select the appropriate Workspace:
 
 <kbd>
-  <img src="media/NewSlackApp.png">
+  <img src="media/NewSlackApp.png" width="300">
 </kbd>
 
 3. Click the `OAuth & Permissions` feature in the left side menu:
@@ -47,7 +47,7 @@ We will need to create a new application, which will generate a token for xMatte
 5. Click `Save Changes`, then scroll up to `Install App to Workspace`. Click `Authorize` to install the app and generate a Token. Click the `Copy` button to copy the token to the clipboard. This will be used below. 
 
 <kbd>
-	<img src="media/SlackToken.png">
+	<img src="media/SlackToken.png" width="300">
 </kbd>
 
 ## xMatters
@@ -66,7 +66,7 @@ We will need to create a new application, which will generate a token for xMatte
    | ---- | --------- |
    | Name | Slack Token |
    | Value | TOKEN_VALUE_HERE |
-   Where TOKEN_VALUE_HERE is the API Key from Slack in the steps above. 
+   Where TOKEN_VALUE_HERE is the Token from Slack in the steps above. 
 
 5. Click `Save Changes` and `Close`.
 5. Expand the Shared libraries section (if necessary) and click the `+ Add` button
