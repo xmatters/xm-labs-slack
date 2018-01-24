@@ -62,11 +62,12 @@ We will need to create a new application, which will generate a token for xMatte
 3. Click Save and Close.
 4. Click the `Edit Constants` button and `Add Constant`; fill out the following details to create a constant to hold the API key:
 
-   | Item | Selection |
+   | Item | Selection | 
    | ---- | --------- |
    | Name | Slack Token |
    | Value | TOKEN_VALUE_HERE |
-   Where TOKEN_VALUE_HERE is the Token from Slack in the steps above. 
+
+Where TOKEN_VALUE_HERE is the Token from Slack in the steps above. 
 
 5. Click `Save Changes` and `Close`.
 5. Expand the Shared libraries section (if necessary) and click the `+ Add` button
