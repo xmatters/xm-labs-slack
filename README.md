@@ -21,6 +21,35 @@ Slack is a pretty sweet chat application with some great API hooks for integrati
 
 # Installation
 
+## Slack
+We will need to create a new application, which will generate a token for xMatters to use to authenticate into Slack. 
+1. Navigate to the [Create a new app](https://api.slack.com/apps) screen and click the `Create New App` button. 
+2. Give the app a descriptive name and select the appropriate Workspace:
+
+<kbd>
+  <img src="media/NewSlackApp.png">
+</kbd>
+
+3. Click the `OAuth & Permissions` feature in the left side menu:
+
+<kbd>
+	<img src="media/SlackOAuthPermissions.png">
+</kbd>
+
+4. Scroll down to Scopes and select the following permissions:
+* channels:history
+* channels:read
+* channels:write
+* team:read
+* users:read
+* chat:write:bot
+
+5. Click `Save Changes`, then scroll up to `Install App to Workspace`. Click `Authorize` to install the app and generate a Token. Click the `Copy` button to copy the token to the clipboard. This will be used below. 
+
+<kbd>
+	<img src="media/SlackToken.png">
+</kbd>
+
 ## xMatters
 1. Log in to your xMatters instance as a user with the Developer role (or anyone with access to the target communication plan). On the Developer tab, click Edit > Integration Builder for the target communication plan. 
 2. Click 'Edit Endpoints', and then click `Add Endpoint` to add an endpoint for Slack; fill out the following details:
@@ -28,15 +57,18 @@ Slack is a pretty sweet chat application with some great API hooks for integrati
    | Item | Selection |
    | ---- | --------- |
    | Name | Slack |
-   | Base URL | `Leave blank` |
-   | Authorization Type | Slack |
+   | Base URL | https://slack.com/ |
    
-3. Click the Connect button and a popup will be displayed requesting authorization:
-<kbd>
-  <img src="media/xM-Slack-Authorize.png" width="500">
-</kbd>
+3. Click Save and Close.
+4. Click the `Edit Constants` button and `Add Constant`; fill out the following details to create a constant to hold the API key:
 
-4. Click Close. 
+   | Item | Selection |
+   | ---- | --------- |
+   | Name | Slack Token |
+   | Value | TOKEN_VALUE_HERE |
+   Where TOKEN_VALUE_HERE is the API Key from Slack in the steps above. 
+
+5. Click `Save Changes` and `Close`.
 5. Expand the Shared libraries section (if necessary) and click the `+ Add` button
 6. Update the name at the top from `My Shared Library` to `Slack`, then paste in the contents of the [Slack.js](Slack.js) file and hit `Save`.
 
