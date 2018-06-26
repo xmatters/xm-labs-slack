@@ -1,6 +1,7 @@
 # Slack
-This is part of the xMatters Labs awesome listing. For others, see [here](https://github.com/xmatters/xMatters-Labs)
-Slack is a pretty sweet chat application with some great API hooks for integrations. This is a Script Library we put together to easily interact with the Slack API endpoints. 
+This is part of the xMatters Labs awesome listing. Slack is a pretty sweet chat application with some great API hooks for integrations. This is a Script Library we put together to easily interact with the Slack API endpoints. 
+
+**Note:** We've launched a Slack bot for initiating events and getting real-time on-call info natively in Slack! Check it out [here](https://support.xmatters.com/hc/en-us/articles/209703083). The Shared Library below can still be useful if you want to create Slack channels or post messages into channels from *any* xMatters Comm Plan, so you can use them both to create some sweet hybrid chatopsy toolchainz!
 
 ---------
 
