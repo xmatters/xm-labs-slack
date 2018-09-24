@@ -197,6 +197,31 @@ exports.getUserInfo = function( userid ) {
 }
 
 
+exports.inviteToChannel = function( userName, channelName, userId, channelId  ) {  
+
+    var channel;
+    if( !channelId ) {
+      channel = this.getChannel( channelName )
+      channelId = channel.channel_name;
+   }
+
+   if( !userId ) {
+      userId = this.getUserInfo( userName );
+   }
+   
+   var slackRequest = http.request({                
+    'endpoint': 'Slack',                
+    'method': 'POST',              
+    'path': '/channels.invite?token=' + constants["SlackToken"] + '&channel=' + channelId + "&user=" + userId, 
+    'headers': {                    
+        'Content-Type': 'application/json'                
+    }            
+   });
+   
+   slackResponse = slackRequest.write();            
+
+}
+
 exports.postMessage = function( payload ) {
     
     payload.token = constants["Slack Token"];
