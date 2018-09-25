@@ -225,6 +225,10 @@ exports.inviteToChannel = function( userName, channelName, userId, channelId  ) 
 exports.postMessage = function( payload ) {
     
     payload.token = constants["Slack Token"];
+    if( payload.attachments ) {
+        payload.attachments = JSON.stringify( payload.attachments );
+    }
+    
     var qs = jsonToQueryString( payload );
 
     var slackRequest = http.request({
