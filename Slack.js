@@ -90,13 +90,22 @@
     // * 3.) Invites the Slack User to the channel (if the user already exists in the channel a message will be posted in the channel)
     // * 4.) Invites the xMatters Bot to the channel (if the bot already exists in the channel a message will be posted in the channel)
 
-    var incidentId = callback_msg.eventProperties.Incident_Number;
-    var responder = callback_msg.recipient;
-    var slackChannel = slack.createChannel(incidentId);
-    var slackUser = slack.getUserInfo(responder);
-    slack.channelInvite(slackUser, slackChannel);
-    var xmattersUser = slack.getUserInfo('xmatters');
-    slack.channelInvite(xmattersUser, slackChannel);
+    var incidentId = payload.eventProperties.Incident_Number;
+    var responder = payload.recipient;
+
+    if (payload.response.toUpperCase() == "CREATE SLACK CHANNEL") {
+
+      //Creating the Channel
+      var slackChannel = slack.createChannel(incidentId);
+
+      //Adding the user to the Channel
+      var slackUser = slack.getUserInfo(responder);
+      slack.channelInvite(slackUser, slackChannel);
+
+      //Adding the xMatters Bot to the newly created Channel
+      var xmattersUser = slack.getUserInfo('xmatters');
+      slack.channelInvite(xmattersUser, slackChannel);
+    }
  *
  */
 
