@@ -98,11 +98,11 @@
       //Creating the Channel
       var slackChannel = slack.createChannel(incidentId);
 
-      //Adding the user to the Channel
+      //Adding the User to the Channel
       var slackUser = slack.getUserInfo(responder);
       slack.channelInvite(slackUser, slackChannel);
 
-      //Adding the xMatters Bot to the newly created Channel
+      //Adding the xMatters Bot to the Channel
       var xmattersUser = slack.getUserInfo('xmatters');
       slack.channelInvite(xmattersUser, slackChannel);
     }
